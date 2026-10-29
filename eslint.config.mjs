@@ -10,7 +10,7 @@ export default [
   ...tslint.configs.recommended,
   ...angular.configs.tsRecommended,
   {
-    ignores: ['**/dist', '**/out-tsc'],
+    ignores: ['**/dist', '**/out-tsc', '**/vitest.config.*.timestamp*'],
   },
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
@@ -158,7 +158,10 @@ export default [
         },
       ],
       '@angular-eslint/template/button-has-type': 'warn',
-      '@angular-eslint/template/cyclomatic-complexity': ['warn', { maxComplexity: 10 }],
+      '@angular-eslint/template/cyclomatic-complexity': [
+        'warn',
+        { maxComplexity: 10 },
+      ],
       '@angular-eslint/template/eqeqeq': 'error',
       '@angular-eslint/template/prefer-control-flow': 'error',
       '@angular-eslint/template/prefer-ngsrc': 'warn',

@@ -14,7 +14,17 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "strict": false,
-    "paths": {}
+    "paths": {
+      "@fe-test-workspace/task-mangement": [
+        "./libs/task-management/src/index.ts"
+      ],
+      "@fe-test-workspace/team-mangement": [
+        "./libs/team-management/src/index.ts"
+      ],
+      "@fe-test-workspace/settings": ["./libs/settings/src/index.ts"],
+      "@fe-test-workspace/analytics": ["./libs/analytics/src/index.ts"],
+      "@fe-test-workspace/shared": ["./libs/shared/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
