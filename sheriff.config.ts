@@ -17,7 +17,7 @@ export const config: SheriffConfig = {
   depRules: {
     // root is a virtual module, which contains all files not being part
     // of any module, e.g. application shell, main.ts, etc.
-    'root': 'noTag',
+    'root': ['noTag', 'domain:task-management'],
     'noTag': 'noTag',
 
     
