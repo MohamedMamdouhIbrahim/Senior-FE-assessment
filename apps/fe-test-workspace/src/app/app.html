@@ -1,22 +1,38 @@
 <mat-sidenav-container>
   <mat-sidenav
+    [class]="isMobile() ? 'px-3' : 'px-5'"
     [mode]="sidenavMode()"
     [opened]="sidenavOpened()"
     (closedStart)="sidenavOpened.set(false)"
   >
+    @if (isMobile()) {
+    <div class="mobile-sidenav-header">
+      <button
+        aria-label="Close navigation"
+        mat-icon-button
+        (click)="sidenavOpened.set(false)"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    }
     <mat-nav-list>
       @for (item of navigation; track item.route) {
       <a
+        class="navigation-link"
         mat-list-item
-        routerLinkActive="active"
+        routerLinkActive="active-navigation-link"
         [routerLink]="item.route"
         (click)="isMobile() && sidenavOpened.set(false)"
       >
-        <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+        <mat-icon matListItemIcon [svgIcon]="item.icon"></mat-icon>
         <span matListItemTitle>{{ item.label }}</span>
       </a>
       }
     </mat-nav-list>
+    <button class="mt-5 w-100" color="primary" mat-flat-button>
+      + new task
+    </button>
   </mat-sidenav>
 
   <mat-sidenav-content>

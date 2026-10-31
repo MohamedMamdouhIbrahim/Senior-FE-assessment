@@ -10,11 +10,14 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { map } from 'rxjs';
 
 const NAVIGATION = [
-  { label: 'Kanban board', route: '/board', icon: 'view_kanban' },
-  { label: 'Analytics', route: '/analytics', icon: 'insights' },
-  { label: 'Team', route: '/team', icon: 'groups' },
-  { label: 'Settings', route: '/settings', icon: 'settings' },
+  { label: 'Dashboard', route: '/board', icon: 'dashboard-tab' },
+  { label: 'Tasks', route: '/tasks', icon: 'tasks-tab' },
+  { label: 'Calender', route: '/calender', icon: 'calender' },
+  { label: 'Analytics', route: '/analytics', icon: 'analytics' },
+  { label: 'Team', route: '/team', icon: 'team-tab' },
+  { label: 'Settings', route: '/settings', icon: 'settings-tab' },
 ] as const;
+
 const MOBILE_MAX_SIZE = 770; // px
 @Component({
   imports: [
