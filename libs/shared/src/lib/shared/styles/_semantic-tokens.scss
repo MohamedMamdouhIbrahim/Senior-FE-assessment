@@ -1,0 +1,26 @@
+:root {
+  // Surfaces
+  --color-bg-app: var(--color-neutral-100);
+  --color-bg-summary-card: var(--color-black-alpha-12);
+  --color-bg-hover: var(--color-black-alpha-5);   
+
+  // Text
+  --color-text-strong: var(--color-black);
+  --color-text-primary: var(--color-neutral-900);
+  --color-text-secondary: var(--color-neutral-600);
+  --color-text-on-color: var(--color-white);      
+
+  // Brand / interactive
+  --color-primary: var(--color-blue-700);
+  --color-primary-hover: var(--color-blue-800);
+
+  // Status
+  --color-success: var(--color-green-700);
+
+  --color-error: var(--color-red-700);
+  --color-error-border: var(--color-red-700-alpha-30);
+  --color-error-surface: var(--color-red-50);
+
+  --color-warning: var(--color-orange-700);
+  --color-warning-surface: var(--color-orange-50);
+}

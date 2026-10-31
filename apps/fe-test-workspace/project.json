@@ -29,6 +29,9 @@
         "outputMode": "server",
         "security": {
           "allowedHosts": []
+        },
+        "stylePreprocessorOptions": {
+          "includePaths": ["libs/shared/src/lib/shared/styles"]
         }
       },
       "configurations": {
