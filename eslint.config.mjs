@@ -1,12 +1,15 @@
 import nx from '@nx/eslint-plugin';
 import angular from 'angular-eslint';
 import tslint from 'typescript-eslint';
+import sheriff from '@softarc/eslint-plugin-sheriff';
+
 export default [
   ...nx.configs['flat/base'],
   ...nx.configs['flat/typescript'],
   ...nx.configs['flat/javascript'],
   ...nx.configs['flat/angular'],
   ...nx.configs['flat/angular-template'],
+  sheriff.configs.all,
   ...tslint.configs.recommended,
   ...angular.configs.tsRecommended,
   {
