@@ -1,0 +1,89 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+.workspace-shell {
+  height: 100%;
+  background: var(--mat-sys-surface-container-low);
+}
+
+.workspace-navigation {
+  width: 248px;
+  padding: 20px 12px;
+  border-right: 1px solid var(--mat-sys-outline-variant);
+  background: var(--mat-sys-surface);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 12px 28px;
+  color: var(--mat-sys-on-surface);
+  font-size: 19px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.brand-mark {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border-radius: 10px;
+  background: var(--mat-sys-primary);
+  color: var(--mat-sys-on-primary);
+}
+
+.navigation-label {
+  margin: 0;
+  padding: 0 12px 8px;
+  color: var(--mat-sys-on-surface-variant);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.active-navigation-link {
+  --mat-list-list-item-container-color: var(--mat-sys-secondary-container);
+  --mat-list-list-item-label-text-color: var(--mat-sys-on-secondary-container);
+  border-radius: 8px;
+}
+
+.workspace-toolbar {
+  min-height: 64px;
+  border-bottom: 1px solid var(--mat-sys-outline-variant);
+  background: var(--mat-sys-surface);
+}
+
+.toolbar-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.mobile-menu-button {
+  display: none;
+  margin-right: 12px;
+}
+
+.page-content {
+  min-height: calc(100% - 64px);
+  padding: 32px;
+}
+
+@media (max-width: 720px) {
+  .workspace-navigation {
+    width: 208px;
+    box-shadow: 0 12px 28px rgb(0 0 0 / 18%);
+  }
+
+  .mobile-menu-button {
+    display: inline-flex;
+  }
+
+  .page-content {
+    padding: 20px 16px;
+  }
+}

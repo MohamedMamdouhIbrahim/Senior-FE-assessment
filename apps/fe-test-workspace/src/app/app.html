@@ -1,2 +1,32 @@
-<app-nx-welcome />
-<router-outlet />
+<mat-sidenav-container>
+  <mat-sidenav
+    [mode]="sidenavMode()"
+    [opened]="sidenavOpened()"
+    (closedStart)="sidenavOpened.set(false)"
+  >
+    <mat-nav-list>
+      @for (item of navigation; track item.route) {
+      <a
+        mat-list-item
+        routerLinkActive="active"
+        [routerLink]="item.route"
+        (click)="isMobile() && sidenavOpened.set(false)"
+      >
+        <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+        <span matListItemTitle>{{ item.label }}</span>
+      </a>
+      }
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar>
+      @if (isMobile()) {
+      <button mat-icon-button (click)="toggleSidenav()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      }
+    </mat-toolbar>
+    <router-outlet />
+  </mat-sidenav-content>
+</mat-sidenav-container>
