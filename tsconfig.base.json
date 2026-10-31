@@ -18,6 +18,9 @@
       "@fe-test-workspace/task-mangement": [
         "./libs/task-management/src/index.ts"
       ],
+      "@fe-test-workspace/task-management/kanban-board": [
+        "./libs/task-management/src/lib/features/kanban-board/kanban-board.ts"
+      ],
       "@fe-test-workspace/team-mangement": [
         "./libs/team-management/src/index.ts"
       ],
