@@ -1,8 +1,16 @@
-import { ChangeDetectionStrategy, Component, computed, inject, linkedSignal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+  Injector,
+  linkedSignal,
+} from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -22,6 +30,7 @@ const MOBILE_MAX_SIZE = 770; // px
 @Component({
   imports: [
     MatButtonModule,
+    MatDialogModule,
     MatIconModule,
     MatListModule,
     MatSidenavModule,
@@ -37,6 +46,8 @@ const MOBILE_MAX_SIZE = 770; // px
 })
 export class App {
   protected readonly navigation = NAVIGATION;
+  private readonly dialog = inject(MatDialog);
+  private readonly injector = inject(Injector);
 
   protected readonly isMobile = toSignal(
     inject(BreakpointObserver)
@@ -45,12 +56,36 @@ export class App {
     { initialValue: false },
   );
 
-  protected readonly sidenavMode = computed(() => (this.isMobile() ? 'over' : 'side'));
-
+  protected readonly sidenavMode = computed(() =>
+    this.isMobile() ? 'over' : 'side',
+  );
 
   protected readonly sidenavOpened = linkedSignal(() => !this.isMobile());
 
   protected toggleSidenav(): void {
     this.sidenavOpened.update((open) => !open);
+  }
+
+  //since task magagemnt is a lazy loaded lib but we need add task in the layout so 
+  // we lazy load the component and the store here not direct import
+  protected openCreateTaskDialog(): void {
+    Promise.all([
+      import(
+        '@fe-test-workspace/task-management/lib/features/create-task/create-task'
+      ),
+      import('@fe-test-workspace/task-management/lib/data-access/task.store'),
+    ]).then(([{ CreateTask }, { TaskStore }]) => {
+      const taskStore = this.injector.get(TaskStore);
+      const dialogRef = this.dialog.open(CreateTask, {
+        width: '560px',
+        maxWidth: 'calc(100vw - 32px)',
+      });
+
+      dialogRef.componentInstance.taskCreated.subscribe((task) => {
+        taskStore.addTask(task);
+        dialogRef.close();
+      });
+      dialogRef.componentInstance.cancelled.subscribe(() => dialogRef.close());
+    });
   }
 }

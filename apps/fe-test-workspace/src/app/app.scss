@@ -46,11 +46,14 @@
   text-transform: uppercase;
 }
 
+.navigation-link {
+  border-radius: 0.5rem;
+}
+
 .active-navigation-link {
   --mat-list-list-item-container-color: var(--color-primary);
   --mat-list-list-item-label-text-color: var(--color-text-on-color);
   --mat-list-list-item-leading-icon-color: var(--color-text-on-color);
-  border-radius: 8px;
 }
 
 .active-navigation-link:hover {

@@ -25,12 +25,17 @@
         [routerLink]="item.route"
         (click)="isMobile() && sidenavOpened.set(false)"
       >
-        <mat-icon matListItemIcon [svgIcon]="item.icon"></mat-icon>
+        <mat-icon matListItemIcon [svgIcon]="item.icon" />
         <span matListItemTitle>{{ item.label }}</span>
       </a>
       }
     </mat-nav-list>
-    <button class="mt-5 w-100" color="primary" mat-flat-button>
+    <button
+      class="mt-5 w-100"
+      color="primary"
+      mat-flat-button
+      (click)="openCreateTaskDialog()"
+    >
       + new task
     </button>
   </mat-sidenav>

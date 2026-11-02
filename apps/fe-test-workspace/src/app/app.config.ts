@@ -1,6 +1,7 @@
 import {
   ApplicationConfig,
   inject,
+  Injector,
   provideAppInitializer,
   provideBrowserGlobalErrorListeners,
 } from '@angular/core';
@@ -24,8 +25,8 @@ export const appConfig: ApplicationConfig = {
   ],
 };
 
- // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
- const registerIcons = () => {
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+const registerIcons = () => {
   const registry = inject(MatIconRegistry);
   const sanitizer = inject(DomSanitizer);
 
@@ -46,7 +47,7 @@ export const appConfig: ApplicationConfig = {
   icons.forEach((name) =>
     registry.addSvgIcon(
       name,
-      sanitizer.bypassSecurityTrustResourceUrl(`assets/icons/${name}.svg`)
-    )
+      sanitizer.bypassSecurityTrustResourceUrl(`assets/icons/${name}.svg`),
+    ),
   );
-}
+};

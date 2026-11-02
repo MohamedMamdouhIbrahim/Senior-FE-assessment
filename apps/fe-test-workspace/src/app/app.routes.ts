@@ -10,7 +10,7 @@ export const appRoutes: Route[] = [
     path: 'board',
     title: 'Kanban board',
     loadComponent: () =>
-      import('@fe-test-workspace/task-management/kanban-board').then(
+      import('@fe-test-workspace/task-management/lib/features/kanban-board/kanban-board').then(
         (module) => module.KanbanBoard,
       ),
   },
@@ -18,7 +18,7 @@ export const appRoutes: Route[] = [
     path: 'analytics',
     title: 'Analytics',
     loadComponent: () =>
-      import('@fe-test-workspace/analytics').then(
+      import('@fe-test-workspace/analytics/lib/analytics/analytics').then(
         (module) => module.Analytics,
       ),
   },
@@ -26,7 +26,7 @@ export const appRoutes: Route[] = [
     path: 'team',
     title: 'Team',
     loadComponent: () =>
-      import('@fe-test-workspace/team-mangement').then(
+      import('@fe-test-workspace/team-mangement/lib/team-mangement/team-mangement').then(
         (module) => module.TeamMangement,
       ),
   },
@@ -34,7 +34,7 @@ export const appRoutes: Route[] = [
     path: 'settings',
     title: 'Settings',
     loadComponent: () =>
-      import('@fe-test-workspace/settings').then(
+      import('@fe-test-workspace/settings/lib/settings/settings').then(
         (module) => module.Settings,
       ),
   },

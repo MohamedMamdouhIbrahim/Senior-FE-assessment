@@ -1,2 +1,2 @@
-export * from './lib/shared/shared';
-export * from './lib/shared/styles/_index.scss';
+// export * from './lib/shared/src/shared';
+export * from './lib/shared/styles/index.scss';
