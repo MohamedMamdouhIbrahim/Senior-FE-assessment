@@ -1,1 +1,29 @@
-<p>kanban-column works!</p>
+<section class="kanban-column">
+  <!-- Column header -->
+  <header class="column-header">
+    <h2 class="column-title">{{ columnTitle() }}</h2>
+    <span class="task-count">{{ tasks().length }}</span>
+  </header>
+
+  <!-- Drop list -->
+  <div
+    cdkDropList
+    [id]="columnStatus()"
+    [cdkDropListData]="tasks()"
+    [cdkDropListConnectedTo]="connectedTo()"
+    (cdkDropListDropped)="onDrop($event)"
+    class="task-list"
+    [class.task-list--empty]="tasks().length === 0"
+  >
+    @for (task of tasks(); track task.id) {
+      <task-management-summary-card
+        [task]="task"
+        (taskClick)="taskClicked.emit($event)"
+      />
+    } @empty {
+      <div class="empty-state">
+        <p>No tasks</p>
+      </div>
+    }
+  </div>
+</section>
