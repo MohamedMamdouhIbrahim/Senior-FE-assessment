@@ -1,25 +1,31 @@
 import { SheriffConfig } from '@softarc/sheriff-core';
 
-/**
-  * Minimal configuration for Sheriff
-  * Assigns the 'noTag' tag to all modules and
-  * allows all modules to depend on each other.
-  */
-
 export const config: SheriffConfig = {
   enableBarrelLess: true,
 
   modules: {
-    // apply tags to your modules
     'libs/<domain>/src/lib/<type>': ['domain:<domain>', 'type:<type>'],
-  }, 
+  },
 
   depRules: {
-    // root is a virtual module, which contains all files not being part
-    // of any module, e.g. application shell, main.ts, etc.
-    'root': ['noTag', 'domain:task-management'],
-    'noTag': 'noTag',
+    // A domain can only depend on its own domain.
+    'domain:*': ({ from, to }) => from === to,
 
-    
+    // Features can depend on data-access, UI, and utils.
+    'type:feature': ['type:data-access', 'type:ui', 'type:utils'],
+
+    // Data-access can depend on utils only.
+    'type:data-access': 'type:utils',
+
+    // UI can depend on utils only.
+    'type:ui': 'type:utils',
+
+    // Utils cannot depend on other architectural layers.
+    'type:utils': [],
+
+    // Application shell can access domain features.
+
+    root: '*',
+    noTag: ['noTag', 'root'],
   },
 };
