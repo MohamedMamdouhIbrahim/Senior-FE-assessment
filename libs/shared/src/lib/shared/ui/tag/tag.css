@@ -1,0 +1,14 @@
+.low {
+  color: var(--color-success);
+  background: var(--color-success-surface);
+}
+
+.medium {
+  color: var(--color-warning);
+  background: var(--color-warning-surface);
+}
+
+.high {
+  color: var(--color-error);
+  background: var(--color-error-surface);
+}
