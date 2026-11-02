@@ -1,1 +1,12 @@
-<p>kanban-board works!</p>
+<div class="board">
+  @for (column of columns(); track column.id) {
+    <task-management-kanban-column
+      [columnStatus]="column.id"
+      [columnTitle]="column.title"
+      [connectedTo]="getConnectedTo(column.id)"
+      [tasks]="column.tasks"
+      (taskClicked)="taskClicked.emit($event)"
+      (taskDropped)="taskDropped.emit($event)"
+    />
+  }
+</div>
