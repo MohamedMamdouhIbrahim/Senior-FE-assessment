@@ -10,24 +10,51 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": ["es2020", "dom"],
+    "lib": [
+      "es2020",
+      "dom"
+    ],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "strict": false,
-    "paths": {
-      "@fe-test-workspace/task-mangement": [
-        "./libs/task-management/src/index.ts"
+"paths": {
+      "@fe-test-workspace/task-management/*": [
+        "./libs/task-management/src/*"
       ],
-      "@fe-test-workspace/task-management/kanban-board": [
-        "./libs/task-management/src/lib/features/kanban-board/kanban-board.ts"
+      "@fe-test-workspace/task-mangement/*": [
+        "./libs/task-management/src/*"
       ],
-      "@fe-test-workspace/team-mangement": [
-        "./libs/team-management/src/index.ts"
+      "@fe-test-workspace/team-management/*": [
+        "./libs/team-management/src/*"
       ],
-      "@fe-test-workspace/settings": ["./libs/settings/src/index.ts"],
-      "@fe-test-workspace/analytics": ["./libs/analytics/src/index.ts"],
-      "@fe-test-workspace/shared": ["./libs/shared/src/index.ts"]
+      "@fe-test-workspace/team-mangement/*": [
+        "./libs/team-management/src/*"
+      ],
+      "@fe-test-workspace/settings/*": [
+        "./libs/settings/src/*"
+      ],
+      "@fe-test-workspace/analytics/*": [
+        "./libs/analytics/src/*"
+      ],
+      "@fe-test-workspace/shared/*": [
+        "./libs/shared/src/*"
+      ],
+      "@fe-test-workspace/shared/ui/*": [
+        "./libs/shared/src/lib/shared/ui/*"
+      ],
+      "@fe-test-workspace/shared/styles/*": [
+        "./libs/shared/src/lib/shared/styles/*"
+      ],
+      "@fe-test-workspace/shared/icons/*": [
+        "./libs/shared/src/lib/shared/icons/*"
+      ],
+      "@fe-test-workspace/shared/utils/*": [
+        "./libs/shared/src/lib/shared/utils/*"
+      ]
     }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
 }

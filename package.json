@@ -2,7 +2,22 @@
   "name": "@fe-test-workspace/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "nx": "nx",
+    "start": "nx serve <app-name>",
+    "build": "nx build <app-name>",
+    "watch": "nx build <app-name> --watch --configuration=development",
+    "test": "nx test <project-name>",
+    "lint": "nx lint <project-name>",
+    "format": "prettier --write \"**/*.{ts,html,scss,css,json,md}\"",
+    "prepare": "husky",
+    "affected:build": "nx affected -t build",
+    "affected:test": "nx affected -t test",
+    "affected:lint": "nx affected -t lint",
+    "graph": "nx graph",
+    "reset": "nx reset",
+    "format:check": "prettier --check \"**/*.{ts,html,scss,css,json,md}\""
+  },
   "private": true,
   "dependencies": {
     "@angular-devkit/build-angular": "~22.2.0",
