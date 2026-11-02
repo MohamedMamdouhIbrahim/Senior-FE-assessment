@@ -1,0 +1,6 @@
+.primary {
+  background-color: var(--color-primary);
+  padding: 1rem;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+}
