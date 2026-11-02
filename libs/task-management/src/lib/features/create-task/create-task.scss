@@ -1,0 +1,182 @@
+:host {
+  display: block;
+}
+
+.create-task {
+  padding: 28px;
+  color: var(--mat-sys-on-surface);
+}
+
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+h2 {
+  margin: 0 0 6px;
+  font-size: 22px;
+  font-weight: 650;
+}
+
+.dialog-header p {
+  margin: 0;
+  color: var(--mat-sys-on-surface-variant);
+}
+
+.close-button {
+  align-self: flex-start;
+  border: 0;
+  background: transparent;
+  color: var(--mat-sys-on-surface-variant);
+  cursor: pointer;
+  font-size: 26px;
+  line-height: 1;
+}
+
+form {
+  display: grid;
+  gap: 10px;
+}
+
+label {
+  margin-top: 6px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+label span {
+  color: var(--mat-sys-on-surface-variant);
+  font-weight: 400;
+}
+
+input,
+textarea,
+select {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid var(--mat-sys-outline-variant);
+  border-radius: 8px;
+  background: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+  font: inherit;
+}
+
+textarea {
+  resize: vertical;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--mat-sys-primary);
+  outline: 2px solid color-mix(in srgb, var(--mat-sys-primary) 20%, transparent);
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.field-row > div {
+  display: grid;
+  gap: 10px;
+}
+
+.field-error-slot {
+  min-height: 2rem;
+  line-height: 1rem;
+}
+
+.field-error {
+  color: var(--mat-sys-error);
+  font-size: 12px;
+}
+
+.tag-entry {
+  display: flex;
+  gap: 8px;
+}
+
+.tag-entry input {
+  min-width: 0;
+}
+
+.tag-entry .button-secondary {
+  padding: 0 12px;
+  white-space: nowrap;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: var(--mat-sys-surface-container-high);
+  font-size: 13px;
+}
+
+.tag-chip button {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.form-actions button {
+  min-height: 40px;
+  padding: 0 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+}
+
+.button-secondary {
+  border: 1px solid var(--mat-sys-outline-variant);
+  background: transparent;
+  color: var(--mat-sys-on-surface);
+}
+
+.button-primary {
+  border: 1px solid var(--mat-sys-primary);
+  background: var(--mat-sys-primary);
+  color: var(--mat-sys-on-primary);
+}
+
+.button-primary:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+@media (max-width: 480px) {
+  .create-task {
+    padding: 20px;
+  }
+
+  .field-row {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
