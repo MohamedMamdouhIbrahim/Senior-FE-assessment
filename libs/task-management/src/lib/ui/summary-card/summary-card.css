@@ -18,6 +18,11 @@
   gap: 0.5rem;
 }
 
+.summary-card.overdue-critical {
+  background: var(--color-error-surface);
+  border-left: 3px solid var(--color-red-700-a30);
+}
+
 .summary-card:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
   transform: translateY(-1px);
@@ -89,7 +94,6 @@
 .overdue-badge {
   font-size: 0.625rem;
   font-weight: 600;
-  text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--color-error);
   background: var(--color-error-surface);
@@ -134,4 +138,3 @@
 .due-date.overdue {
   color: var(--color-error);
 }
-
