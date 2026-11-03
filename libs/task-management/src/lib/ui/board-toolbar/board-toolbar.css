@@ -28,7 +28,7 @@
   padding: 0.5rem 0.875rem;
   border: 1px solid var(--mat-sys-outline-variant);
   border-radius: 0.5rem;
-  background: var(--mat-sys-surface);
+  background: var(--color-bg-surface);
   color: var(--mat-sys-on-surface);
   cursor: pointer;
   font: inherit;

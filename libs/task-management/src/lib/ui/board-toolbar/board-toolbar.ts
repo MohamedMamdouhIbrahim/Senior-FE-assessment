@@ -4,7 +4,7 @@ import {
   input,
   output,
 } from '@angular/core';
-import type { TaskStatus } from '../../data-access/task.model';
+import type { TaskStatus } from '../../data-access/models/task.model';
 
 export type BoardFilter = { id: TaskStatus | 'all'; label: string };
 

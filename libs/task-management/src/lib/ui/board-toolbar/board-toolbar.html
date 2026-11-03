@@ -20,15 +20,15 @@
       type="button"
       (click)="prioritySortToggled.emit()"
     >
-      {{ prioritySort() === 'desc' ? 'Priority: High to low' : prioritySort()
-      === 'asc' ? 'Priority: Low to high' : 'Sort by priority' }}
+      {{ prioritySort() === 'desc' ? 'Priority ▾' : prioritySort() === 'asc' ?
+      'Priority ▴' : 'Priority ▾' }}
     </button>
     <button
       class="toolbar-button toolbar-button--primary"
       type="button"
       (click)="createTaskClicked.emit()"
     >
-      Create task
+      + New Task
     </button>
   </div>
 </div>
