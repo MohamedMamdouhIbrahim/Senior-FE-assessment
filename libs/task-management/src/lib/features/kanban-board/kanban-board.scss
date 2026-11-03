@@ -1,15 +1,12 @@
 :host {
   display: flex;
   flex-direction: column;
-  height: 100%;
-  min-height: 0;
   padding: 1.5rem;
   box-sizing: border-box;
 }
 
 .board-content {
-  flex: 1;
-  min-height: 0;
+  min-width: 0;
 }
 
 .dialog-backdrop {
