@@ -1,4 +1,4 @@
-import type { Task } from '../data-access/task.model';
+import type { Task } from '../data-access/models/task.model';
 import { getTaskSummaryDetails } from './task-summary.utils';
 
 describe('getTaskSummaryDetails', () => {

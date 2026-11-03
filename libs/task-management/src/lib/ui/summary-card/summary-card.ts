@@ -5,7 +5,7 @@ import {
   output,
 } from '@angular/core';
 import { CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
-import type { Task } from '../../data-access/task.model';
+import type { Task } from '../../data-access/models/task.model';
 import { Avatar } from '@fe-test-workspace/shared/ui/avatar/avatar';
 import { Tag } from '@fe-test-workspace/shared/ui/tag/tag';
 

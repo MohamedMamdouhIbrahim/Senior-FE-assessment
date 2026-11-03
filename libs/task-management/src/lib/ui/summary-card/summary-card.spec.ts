@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import type { Task } from '../../data-access/task.model';
+import type { Task } from '../../data-access/models/task.model';
 import { SummaryCard } from './summary-card';
 
 describe('SummaryCard', () => {

@@ -8,7 +8,7 @@ import {
   CdkDropList,
   CdkDragDrop,
 } from '@angular/cdk/drag-drop';
-import type { Task, TaskStatus } from '../../data-access/task.model';
+import type { Task, TaskStatus } from '../../data-access/models/task.model';
 import { SummaryCard } from '../summary-card/summary-card';
 
 export interface ColumnDropEvent {
