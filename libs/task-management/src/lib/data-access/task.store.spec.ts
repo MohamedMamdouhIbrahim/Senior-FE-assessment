@@ -21,6 +21,11 @@ describe('TaskStore', () => {
 
   afterEach(() => httpTestingController.verify());
 
+  it('initializes with mock tasks before a client request', () => {
+    expect(store.tasks()).toHaveLength(17);
+    httpTestingController.expectNone('assets/mock-data/tasks.json');
+  });
+
   it('loads mock tasks and keeps computed data in sync with CRUD changes', () => {
     store.loadTasks().subscribe();
     httpTestingController

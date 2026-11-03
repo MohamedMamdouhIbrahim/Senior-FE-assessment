@@ -30,16 +30,17 @@
             "output": "/assets"
           },
           {
+            "glob": "tasks.json",
+            "input": "libs/task-management/src/lib/data-access",
+            "output": "/assets/mock-data"
+          },
+          {
             "glob": "**/*",
             "input": "libs/shared/src/lib/shared/icons",
             "output": "/assets/icons"
           }
         ],
-        "styles": [
-          "node_modules/bootstrap/dist/css/bootstrap.min.css",
-          "apps/fe-test-workspace/src/styles.scss"
-        ],
-        "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"],
+        "styles": ["apps/fe-test-workspace/src/styles.scss"],
         "server": "apps/fe-test-workspace/src/main.server.ts",
         "ssr": {
           "entry": "apps/fe-test-workspace/src/server.ts"

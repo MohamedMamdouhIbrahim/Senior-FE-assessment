@@ -31,6 +31,7 @@
     "@angular/platform-server": "~22.2.0",
     "@angular/router": "~22.2.0",
     "@angular/ssr": "~22.2.0",
+    "@netlify/angular-runtime": "^4.0.0",
     "@ngrx/signals": "^22.0.1",
     "bootstrap": "^5.3.8",
     "express": "^4.21.2",

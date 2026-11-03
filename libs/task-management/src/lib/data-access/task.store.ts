@@ -11,18 +11,32 @@ import {
 import type { Observable } from 'rxjs';
 import { map, tap } from 'rxjs';
 import { PRIORITIES, STATUSES } from './task-constants';
+import taskData from './tasks.json';
 import type {
   Assignee,
   AssigneeId,
   Task,
   TaskCreate,
   TaskId,
+  TaskPriority,
   TaskStatus,
   TaskUpdate,
 } from './task.model';
 
+type MockTask = Omit<
+  Task,
+  'id' | 'status' | 'priority' | 'assignee' | 'completedAt' | 'isOverdue'
+> & {
+  id: string;
+  status: string;
+  priority: string;
+  assignee?: (Omit<Assignee, 'id'> & { id: string }) | null;
+  completedAt?: string;
+  isOverdue?: boolean;
+};
+
 type MockTaskResponse = {
-  tasks: Task[];
+  tasks: MockTask[];
 };
 
 type TaskState = {
@@ -31,9 +45,30 @@ type TaskState = {
 
 const TASKS_URL = 'assets/mock-data/tasks.json';
 
+const isTaskOverdue = (dueDate: string, status: TaskStatus): boolean =>
+  status !== 'done' && dueDate < new Date().toISOString().slice(0, 10);
+
+const normalizeTask = (task: MockTask): Task => {
+  const status = task.status as TaskStatus;
+  return {
+    ...task,
+    id: task.id as TaskId,
+    status,
+    priority: task.priority as TaskPriority,
+    assignee: task.assignee
+      ? { ...task.assignee, id: task.assignee.id as AssigneeId }
+      : null,
+    completedAt: task.completedAt ?? '',
+    isOverdue: task.isOverdue ?? isTaskOverdue(task.dueDate, status),
+    tags: [...task.tags],
+  };
+};
+
+const INITIAL_TASKS = (taskData as MockTaskResponse).tasks.map(normalizeTask);
+
 export const TaskStore = signalStore(
   { providedIn: 'root' },
-  withState<TaskState>({ tasks: [] }),
+  withState<TaskState>({ tasks: INITIAL_TASKS }),
   withProps(() => ({
     statuses: STATUSES,
     priorities: PRIORITIES,
@@ -69,7 +104,9 @@ export const TaskStore = signalStore(
     const http = inject(HttpClient);
 
     const findAssignee = (id: AssigneeId): Assignee => {
-      const assignee = store.assignees().find((candidate) => candidate.id === id);
+      const assignee = store
+        .assignees()
+        .find((candidate) => candidate.id === id);
       if (!assignee) {
         throw new Error(`Cannot assign task to unknown assignee "${id}".`);
       }
@@ -93,17 +130,6 @@ export const TaskStore = signalStore(
 
       return id;
     };
-
-    const isTaskOverdue = (dueDate: string, status: TaskStatus): boolean =>
-      status !== 'done' && dueDate < new Date().toISOString().slice(0, 10);
-
-    const normalizeTask = (task: Task): Task => ({
-      ...task,
-      assignee: task.assignee ?? null,
-      completedAt: task.completedAt ?? '',
-      isOverdue: task.isOverdue ?? isTaskOverdue(task.dueDate, task.status),
-      tags: [...task.tags],
-    });
 
     return {
       loadTasks: (): Observable<readonly Task[]> =>
@@ -144,8 +170,7 @@ export const TaskStore = signalStore(
           ...taskChanges,
           ...(assigneeId !== undefined
             ? {
-                assignee:
-                  assigneeId === null ? null : findAssignee(assigneeId),
+                assignee: assigneeId === null ? null : findAssignee(assigneeId),
               }
             : {}),
           completedAt:
