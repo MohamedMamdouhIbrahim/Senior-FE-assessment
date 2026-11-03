@@ -80,41 +80,41 @@
           />
         </svg>
         <input
-          id="task-search-input"
-          type="search"
-          placeholder="Search tasks..."
-          autocomplete="off"
-          role="combobox"
           aria-autocomplete="list"
           aria-controls="task-search-results"
-          [attr.aria-expanded]="isSearchOpen() && searchQuery().trim().length > 0"
+          autocomplete="off"
+          id="task-search-input"
+          placeholder="Search tasks..."
+          role="combobox"
+          type="search"
           [attr.aria-activedescendant]="
             activeSearchResultIndex() >= 0
               ? 'task-search-result-' + activeSearchResultIndex()
               : null
           "
+          [attr.aria-expanded]="isSearchOpen() && searchQuery().trim().length > 0"
           [value]="searchQuery()"
+          (blur)="isSearchOpen.set(false)"
+          (focus)="isSearchOpen.set(true)"
           (input)="updateSearchQuery($event)"
           (keydown)="handleSearchKeydown($event)"
-          (focus)="isSearchOpen.set(true)"
-          (blur)="isSearchOpen.set(false)"
         />
         @if (isSearchOpen() && searchQuery().trim()) {
         <div
+          aria-label="Matching tasks"
           class="search-results"
           id="task-search-results"
           role="listbox"
-          aria-label="Matching tasks"
         >
           @for (task of searchResults(); track task.id; let index = $index) {
           <button
             class="search-result"
-            type="button"
             role="option"
-            [id]="'task-search-result-' + index"
+            type="button"
             [attr.aria-selected]="activeSearchResultIndex() === index"
-            (mousedown)="$event.preventDefault()"
+            [id]="'task-search-result-' + index"
             (click)="selectSearchResult(task)"
+            (mousedown)="$event.preventDefault()"
           >
             <span class="search-result-title">{{ task.title }}</span>
             <span class="search-result-meta"
