@@ -1,9 +1,14 @@
 <section aria-label="Task summary" class="task-summary">
   @for (metric of metrics(); track metric.style) {
   <article class="summary-metric summary-metric--{{ metric.style }}">
-    <h2 class="metric-label">{{ metric.label }}</h2>
+    <div class="tasks-summary__label-icon">
+      <mat-icon matListItemIcon [svgIcon]="metric.icon" />
+      <h2 class="metric-label">{{ metric.label }}</h2>
+    </div>
     <p class="metric-value">{{ metric.value }}</p>
-    <p class="metric-detail">{{ metric.detail }}</p>
+    <p [class]="'metric-detail metric-detail--' + metric.style">
+      {{ metric.detail }}
+    </p>
   </article>
   }
 </section>

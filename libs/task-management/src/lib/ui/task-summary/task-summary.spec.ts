@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import type { Task } from '../../data-access/task.model';
+import type { Task } from '../../data-access/models/task.model';
 import { TaskSummary } from './task-summary';
 
 describe('TaskSummary', () => {
@@ -69,25 +69,41 @@ describe('TaskSummary', () => {
       metric('Total tasks')?.querySelector('.metric-value')?.textContent,
     ).toBe('4');
     expect(
-      metric('Total tasks')?.querySelector('.metric-detail')?.textContent,
+      metric('Total tasks')
+        ?.querySelector('.metric-detail')
+        ?.textContent?.trim(),
     ).toBe('+4 this week');
+    expect(
+      metric('Total tasks')?.querySelector('.metric-detail')?.classList,
+    ).toContain('metric-detail--total');
     expect(
       metric('Completed')?.querySelector('.metric-value')?.textContent,
     ).toBe('1');
     expect(
-      metric('Completed')?.querySelector('.metric-detail')?.textContent,
+      metric('Completed')?.querySelector('.metric-detail')?.textContent?.trim(),
     ).toBe('1 today');
+    expect(
+      metric('Completed')?.querySelector('.metric-detail')?.classList,
+    ).toContain('metric-detail--completed');
     expect(
       metric('In progress')?.querySelector('.metric-value')?.textContent,
     ).toBe('1');
     expect(
-      metric('In progress')?.querySelector('.metric-detail')?.textContent,
+      metric('In progress')
+        ?.querySelector('.metric-detail')
+        ?.textContent?.trim(),
     ).toBe('Same as yesterday');
+    expect(
+      metric('In progress')?.querySelector('.metric-detail')?.classList,
+    ).toContain('metric-detail--in-progress');
     expect(metric('Overdue')?.querySelector('.metric-value')?.textContent).toBe(
       '1',
     );
     expect(
-      metric('Overdue')?.querySelector('.metric-detail')?.textContent,
+      metric('Overdue')?.querySelector('.metric-detail')?.textContent?.trim(),
     ).toBe('1 due today');
+    expect(
+      metric('Overdue')?.querySelector('.metric-detail')?.classList,
+    ).toContain('metric-detail--overdue');
   });
 });

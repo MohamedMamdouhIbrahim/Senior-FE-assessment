@@ -4,13 +4,15 @@ import {
   computed,
   input,
 } from '@angular/core';
-import type { Task } from '../../data-access/task.model';
+import type { Task } from '../../data-access/models/task.model';
 import { getTaskSummaryDetails } from '../../utils/task-summary.utils';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'task-management-ui-task-summary',
   templateUrl: './task-summary.html',
   styleUrl: './task-summary.css',
+  imports: [MatIconModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskSummary {
@@ -27,24 +29,28 @@ export class TaskSummary {
         value: tasks.length,
         detail: details.createdThisWeek,
         style: 'total',
+        icon: 'dashboard-tab',
       },
       {
         label: 'Completed',
         value: tasks.filter((task) => task.status === 'done').length,
         detail: details.completedToday,
         style: 'completed',
+        icon: 'completed',
       },
       {
         label: 'In progress',
         value: tasks.filter((task) => task.status === 'in_progress').length,
         detail: 'Same as yesterday',
         style: 'in-progress',
+        icon: 'in-progress',
       },
       {
         label: 'Overdue',
         value: activeTasks.filter((task) => task.isOverdue).length,
         detail: details.dueToday,
         style: 'overdue',
+        icon: 'overdue',
       },
     ];
   });
