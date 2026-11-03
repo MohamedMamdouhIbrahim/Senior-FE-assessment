@@ -37,6 +37,10 @@
   font-size: 0.875rem;
   font-weight: 600;
 }
+.filter-button {
+  border: 0;
+  background: transparent;
+}
 
 .filter-button:hover,
 .toolbar-button:hover {
@@ -86,9 +90,17 @@
 
   .board-toolbar {
     align-items: stretch;
+    padding: 0.5rem;
+    background: var(--color-bg-surface);
   }
 
   .toolbar-actions {
     justify-content: flex-end;
   }
+}
+.board-toolbar {
+  align-items: stretch;
+  padding: 1rem;
+  background: var(--color-bg-surface);
+  border-radius: 0.5rem;
 }
