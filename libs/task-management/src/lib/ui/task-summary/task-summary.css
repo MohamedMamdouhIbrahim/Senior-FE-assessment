@@ -70,8 +70,10 @@
   font-size: 0.7rem;
   color: var(--color-text-secondary);
   font-weight: 400;
-  svg {
+  .summary-metric-icon {
     width: 1.5rem;
     height: 1.5rem;
+    flex: 0 0 auto;
+    object-fit: contain;
   }
 }

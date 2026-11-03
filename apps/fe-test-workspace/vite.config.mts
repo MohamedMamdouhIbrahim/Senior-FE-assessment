@@ -18,7 +18,8 @@ export default defineConfig(() => ({
     setupFiles: ['src/test-setup.ts'],
     reporters: ['default'],
     coverage: {
-      reportsDirectory: '../../coverage/apps/fe-test-workspace',
+      reportOnFailure: true,
+      reportsDirectory: '../../coverage',
       provider: 'v8',
     },
   },

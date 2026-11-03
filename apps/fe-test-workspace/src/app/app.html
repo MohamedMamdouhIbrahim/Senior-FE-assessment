@@ -31,7 +31,13 @@
         [routerLink]="item.route"
         (click)="isMobile() && sidenavOpened.set(false)"
       >
-        <mat-icon matListItemIcon [svgIcon]="item.icon" />
+        <img
+          alt=""
+          height="24"
+          matListItemIcon
+          width="24"
+          [ngSrc]="'assets/icons/' + item.icon + '.svg'"
+        />
         <span matListItemTitle>{{ item.label }}</span>
       </a>
       }
@@ -48,15 +54,96 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <mat-toolbar>
-      @if (isMobile()) {
-      <button mat-icon-button type="button" (click)="toggleSidenav()">
+    @if (isMobile()) {
+    <div class="mobile-navigation-bar">
+      <button
+        aria-label="Toggle navigation"
+        class="mobile-menu-button"
+        mat-icon-button
+        type="button"
+        (click)="toggleSidenav()"
+      >
         <svg aria-hidden="true" viewBox="0 0 24 24">
           <path d="M3 18h18v-2H3zm0-5h18v-2H3zm0-7v2h18V6z" />
         </svg>
       </button>
-      }
+    </div>
+    } @else {
+    <mat-toolbar class="app-toolbar">
+      <div class="task-search">
+        <label class="visually-hidden" for="task-search-input"
+          >Search tasks</label
+        >
+        <svg aria-hidden="true" class="search-icon" viewBox="0 0 24 24">
+          <path
+            d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.71.71l.27.28v.78L20 21.49 21.49 20zm-5 0A4.5 4.5 0 1 1 10.5 5a4.5 4.5 0 0 1 0 9"
+          />
+        </svg>
+        <input
+          id="task-search-input"
+          type="search"
+          placeholder="Search tasks..."
+          autocomplete="off"
+          role="combobox"
+          aria-autocomplete="list"
+          aria-controls="task-search-results"
+          [attr.aria-expanded]="isSearchOpen() && searchQuery().trim().length > 0"
+          [attr.aria-activedescendant]="
+            activeSearchResultIndex() >= 0
+              ? 'task-search-result-' + activeSearchResultIndex()
+              : null
+          "
+          [value]="searchQuery()"
+          (input)="updateSearchQuery($event)"
+          (keydown)="handleSearchKeydown($event)"
+          (focus)="isSearchOpen.set(true)"
+          (blur)="isSearchOpen.set(false)"
+        />
+        @if (isSearchOpen() && searchQuery().trim()) {
+        <div
+          class="search-results"
+          id="task-search-results"
+          role="listbox"
+          aria-label="Matching tasks"
+        >
+          @for (task of searchResults(); track task.id; let index = $index) {
+          <button
+            class="search-result"
+            type="button"
+            role="option"
+            [id]="'task-search-result-' + index"
+            [attr.aria-selected]="activeSearchResultIndex() === index"
+            (mousedown)="$event.preventDefault()"
+            (click)="selectSearchResult(task)"
+          >
+            <span class="search-result-title">{{ task.title }}</span>
+            <span class="search-result-meta"
+              >{{ task.status.replace('_', ' ') }}</span
+            >
+          </button>
+          } @empty {
+          <p class="search-empty">No tasks found</p>
+          }
+        </div>
+        }
+      </div>
+      <div class="app-toolbar-actions">
+        <button
+          aria-label="Notifications"
+          class="notification-button"
+          mat-icon-button
+          type="button"
+        >
+          <svg aria-hidden="true" viewBox="0 0 24 24">
+            <path
+              d="M12 22a2.25 2.25 0 0 0 2.23-2h-4.46A2.25 2.25 0 0 0 12 22m6-6v-5a6 6 0 0 0-5-5.91V4a1 1 0 0 0-2 0v1.09A6 6 0 0 0 6 11v5l-2 2v1h16v-1z"
+            />
+          </svg>
+        </button>
+        <span aria-label="User avatar: JJ" class="user-avatar">JJ</span>
+      </div>
     </mat-toolbar>
+    }
     <router-outlet />
   </mat-sidenav-content>
 </mat-sidenav-container>

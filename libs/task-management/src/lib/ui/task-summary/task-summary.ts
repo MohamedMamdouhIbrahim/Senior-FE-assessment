@@ -4,15 +4,15 @@ import {
   computed,
   input,
 } from '@angular/core';
+import { NgOptimizedImage } from '@angular/common';
 import type { Task } from '../../data-access/models/task.model';
 import { getTaskSummaryDetails } from '../../utils/task-summary.utils';
-import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'task-management-ui-task-summary',
   templateUrl: './task-summary.html',
   styleUrl: './task-summary.css',
-  imports: [MatIconModule],
+  imports: [NgOptimizedImage],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskSummary {

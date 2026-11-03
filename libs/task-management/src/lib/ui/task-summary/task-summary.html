@@ -2,7 +2,13 @@
   @for (metric of metrics(); track metric.style) {
   <article class="summary-metric summary-metric--{{ metric.style }}">
     <div class="tasks-summary__label-icon">
-      <mat-icon matListItemIcon [svgIcon]="metric.icon" />
+      <img
+        alt=""
+        class="summary-metric-icon"
+        height="24"
+        width="24"
+        [ngSrc]="'assets/icons/' + metric.icon + '.svg'"
+      />
       <h2 class="metric-label">{{ metric.label }}</h2>
     </div>
     <p class="metric-value">{{ metric.value }}</p>
