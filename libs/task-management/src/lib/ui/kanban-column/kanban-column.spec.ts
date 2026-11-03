@@ -12,6 +12,8 @@ describe('KanbanColumn', () => {
 
     fixture = TestBed.createComponent(KanbanColumn);
     component = fixture.componentInstance;
+    fixture.componentRef.setInput('columnTitle', 'To Do');
+    fixture.componentRef.setInput('columnStatus', 'todo');
     await fixture.whenStable();
   });
 

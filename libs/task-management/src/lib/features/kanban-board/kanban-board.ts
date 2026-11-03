@@ -5,7 +5,7 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import { TaskStore } from '../../data-access/task.store';
+import { TaskStore } from '../../data-access';
 import type {
   Task,
   TaskCreate,

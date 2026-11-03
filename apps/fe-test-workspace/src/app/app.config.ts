@@ -1,7 +1,6 @@
 import {
   ApplicationConfig,
   inject,
-  Injector,
   provideAppInitializer,
   provideBrowserGlobalErrorListeners,
 } from '@angular/core';

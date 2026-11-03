@@ -13,7 +13,7 @@ import type {
   TaskCreate,
   TaskUpdate,
 } from '../../data-access/models/task.model';
-import { PRIORITIES, STATUSES } from '../../data-access/task-constants';
+import { PRIORITIES, STATUSES } from '../../data-access';
 
 @Component({
   selector: 'task-management-edit-task',

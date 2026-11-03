@@ -1,10 +1,10 @@
 import type { Task } from '../data-access/models/task.model';
 
-export interface TaskSummaryDetails {
+export type TaskSummaryDetails = {
   createdThisWeek: string;
   completedToday: string;
   dueToday: string;
-}
+};
 
 function localDateKey(date: Date): string {
   const year = date.getFullYear();

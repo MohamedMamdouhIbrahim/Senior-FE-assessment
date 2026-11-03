@@ -6,13 +6,13 @@ import {
 } from '@angular/core';
 import { CdkScrollable } from '@angular/cdk/scrolling';
 import type { Task, TaskStatus } from '../../data-access/models/task.model';
-import { KanbanColumn, ColumnDropEvent } from '../kanban-column/kanban-column';
+import { ColumnDropEvent, KanbanColumn } from '../kanban-column/kanban-column';
 
-export interface KanbanBoardColumn {
+export type KanbanBoardColumn = {
   id: TaskStatus;
   title: string;
   tasks: Task[];
-}
+};
 
 @Component({
   selector: 'task-management-ui-kanban-board',

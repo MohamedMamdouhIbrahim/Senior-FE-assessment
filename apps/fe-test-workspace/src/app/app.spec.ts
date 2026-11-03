@@ -16,8 +16,8 @@ describe('App', () => {
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.textContent).toContain('Flowboard');
-    expect(compiled.textContent).toContain('Kanban board');
+    expect(compiled.textContent).toContain('Dashboard');
+    expect(compiled.textContent).toContain('Tasks');
     expect(compiled.textContent).toContain('Analytics');
     expect(compiled.textContent).toContain('Team');
     expect(compiled.textContent).toContain('Settings');

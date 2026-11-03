@@ -93,9 +93,10 @@
       }
     },
     "test": {
-      "executor": "@angular/build:unit-test",
+      "executor": "nx:run-commands",
       "options": {
-        "watch": false
+        "cwd": "apps/fe-test-workspace",
+        "command": "vitest"
       }
     },
     "serve-static": {

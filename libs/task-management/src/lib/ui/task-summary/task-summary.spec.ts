@@ -13,7 +13,11 @@ describe('TaskSummary', () => {
     fixture = TestBed.createComponent(TaskSummary);
     const now = new Date();
     const dateKey = (date: Date): string =>
-      `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+      [
+        date.getFullYear(),
+        String(date.getMonth() + 1).padStart(2, '0'),
+        String(date.getDate()).padStart(2, '0'),
+      ].join('-');
     const today = dateKey(now);
     const yesterday = new Date(
       now.getFullYear(),
@@ -54,17 +58,13 @@ describe('TaskSummary', () => {
     await fixture.whenStable();
   });
 
-  it('shows task totals and the requested time-based details', () => {
-    const metrics = [
-      ...fixture.nativeElement.querySelectorAll('.summary-metric'),
-    ] as HTMLElement[];
-    const metric = (label: string): HTMLElement | undefined =>
-      metrics.find(
-        (element) =>
-          element.querySelector('.metric-label')?.textContent?.trim() === label,
-      );
+  const metric = (label: string): HTMLElement | undefined =>
+    [...fixture.nativeElement.querySelectorAll('.summary-metric')].find(
+      (element: HTMLElement) =>
+        element.querySelector('.metric-label')?.textContent?.trim() === label,
+    );
 
-    expect(metrics).toHaveLength(4);
+  it('shows the total task count and weekly detail', () => {
     expect(
       metric('Total tasks')?.querySelector('.metric-value')?.textContent,
     ).toBe('4');
@@ -76,6 +76,9 @@ describe('TaskSummary', () => {
     expect(
       metric('Total tasks')?.querySelector('.metric-detail')?.classList,
     ).toContain('metric-detail--total');
+  });
+
+  it('shows completed task count and daily detail', () => {
     expect(
       metric('Completed')?.querySelector('.metric-value')?.textContent,
     ).toBe('1');
@@ -85,6 +88,9 @@ describe('TaskSummary', () => {
     expect(
       metric('Completed')?.querySelector('.metric-detail')?.classList,
     ).toContain('metric-detail--completed');
+  });
+
+  it('shows in-progress task count and comparison detail', () => {
     expect(
       metric('In progress')?.querySelector('.metric-value')?.textContent,
     ).toBe('1');
@@ -96,6 +102,9 @@ describe('TaskSummary', () => {
     expect(
       metric('In progress')?.querySelector('.metric-detail')?.classList,
     ).toContain('metric-detail--in-progress');
+  });
+
+  it('shows overdue task count and due-today detail', () => {
     expect(metric('Overdue')?.querySelector('.metric-value')?.textContent).toBe(
       '1',
     );

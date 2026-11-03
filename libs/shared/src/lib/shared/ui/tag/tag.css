@@ -12,3 +12,8 @@
   color: var(--color-error);
   background: var(--color-error-surface);
 }
+span {
+  font-weight: 700;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+}

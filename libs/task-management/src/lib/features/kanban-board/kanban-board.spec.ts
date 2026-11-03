@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { computed, signal } from '@angular/core';
 import { type Observable, of } from 'rxjs';
+import { TaskStore } from '../../data-access';
 import type { Task, TaskStatus } from '../../data-access/models/task.model';
-import { TaskStore } from '../../data-access/task.store';
 import { KanbanBoard } from './kanban-board';
 
 describe('KanbanBoard', () => {
@@ -69,7 +69,7 @@ describe('KanbanBoard', () => {
     ];
 
     const createButton = buttons().find(
-      (button) => button.textContent.trim() === 'Create task',
+      (button) => button.textContent.trim() === '+ New Task',
     );
     expect(createButton).toBeDefined();
     createButton?.click();
@@ -84,10 +84,10 @@ describe('KanbanBoard', () => {
       );
     sortButton().click();
     fixture.detectChanges();
-    expect(sortButton().textContent.trim()).toBe('Priority: High to low');
+    expect(sortButton().textContent.trim()).toBe('Priority ▾');
 
     sortButton().click();
     fixture.detectChanges();
-    expect(sortButton().textContent.trim()).toBe('Priority: Low to high');
+    expect(sortButton().textContent.trim()).toBe('Priority ▴');
   });
 });

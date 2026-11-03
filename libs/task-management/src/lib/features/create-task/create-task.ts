@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { form, FormField, minLength, required } from '@angular/forms/signals';
 import type { Assignee, TaskCreate } from '../../data-access/models/task.model';
-import { PRIORITIES, STATUSES } from '../../data-access/task-constants';
+import { PRIORITIES, STATUSES } from '../../data-access';
 
 @Component({
   selector: 'task-management-create-task',

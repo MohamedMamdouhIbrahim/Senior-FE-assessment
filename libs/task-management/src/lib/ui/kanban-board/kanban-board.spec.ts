@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { KanbanBoard } from './kanban-board';
+import { KanbanBoardUi } from './kanban-board';
 
 describe('KanbanBoard', () => {
   let component: KanbanBoard;
@@ -7,10 +7,10 @@ describe('KanbanBoard', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [KanbanBoard],
+      imports: [KanbanBoardUi],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(KanbanBoard);
+    fixture = TestBed.createComponent(KanbanBoardUi);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

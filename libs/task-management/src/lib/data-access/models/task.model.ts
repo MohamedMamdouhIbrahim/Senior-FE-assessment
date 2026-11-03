@@ -19,6 +19,9 @@ export type TaskCreate = Omit<
 > & {
   assigneeId?: NonNullable<Task['assignee']>['id'];
 };
+export type TaskCreateInput = Omit<TaskCreate, 'assigneeId'> & {
+  assigneeId?: string;
+};
 export type TaskUpdate = Partial<
   Omit<Task, 'id' | 'createdAt' | 'updatedAt' | 'assignee'>
 > & {

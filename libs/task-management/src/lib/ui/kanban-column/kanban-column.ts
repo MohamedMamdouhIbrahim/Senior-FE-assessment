@@ -4,20 +4,17 @@ import {
   input,
   output,
 } from '@angular/core';
-import {
-  CdkDropList,
-  CdkDragDrop,
-} from '@angular/cdk/drag-drop';
+import { CdkDragDrop, CdkDropList } from '@angular/cdk/drag-drop';
 import type { Task, TaskStatus } from '../../data-access/models/task.model';
 import { SummaryCard } from '../summary-card/summary-card';
 
-export interface ColumnDropEvent {
+export type ColumnDropEvent = {
   task: Task;
   previousColumnStatus: TaskStatus;
   newColumnStatus: TaskStatus;
   previousIndex: number;
   currentIndex: number;
-}
+};
 
 @Component({
   selector: 'task-management-kanban-column',

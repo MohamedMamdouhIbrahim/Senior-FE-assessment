@@ -1,11 +1,11 @@
 <task-management-ui-task-summary [tasks]="tasks()" />
 
 <task-management-ui-board-toolbar
-  [selectedFilter]="selectedFilter()"
   [prioritySort]="prioritySort()"
+  [selectedFilter]="selectedFilter()"
+  (createTaskClicked)="openCreateTask()"
   (filterSelected)="selectFilter($event)"
   (prioritySortToggled)="togglePrioritySort()"
-  (createTaskClicked)="openCreateTask()"
 />
 
 <task-management-ui-kanban-board
@@ -39,8 +39,8 @@
     role="dialog"
   >
     <task-management-edit-task
-      [task]="task"
       [assignees]="assignees()"
+      [task]="task"
       (cancelled)="closeEditTask()"
       (taskUpdated)="onTaskUpdated($event)"
     />

@@ -15,6 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { CreateTaskForm } from '@fe-test-workspace/shared/ui/create-task/create-task';
 import { map } from 'rxjs';
 
 const NAVIGATION = [
@@ -66,27 +67,27 @@ export class App {
     this.sidenavOpened.update((open) => !open);
   }
 
-  //since task magagemnt is a lazy loaded lib but we need add task in the layout so 
-  // we lazy load the component and the store here not direct import
   protected openCreateTaskDialog(): void {
-    Promise.all([
-      import(
-        '@fe-test-workspace/task-management/lib/features/create-task/create-task'
-      ),
-      import('@fe-test-workspace/task-management/lib/data-access/task.store'),
-    ]).then(([{ CreateTask }, { TaskStore }]) => {
-      const taskStore = this.injector.get(TaskStore);
-      const dialogRef = this.dialog.open(CreateTask, {
-        width: '560px',
-        maxWidth: 'calc(100vw - 32px)',
-        maxHeight: 'calc(100dvh - 32px)',
-      });
+    import('@fe-test-workspace/task-management/lib/data-access').then(
+      ({ TaskStore }) => {
+        const taskStore = this.injector.get(TaskStore);
+        const dialogRef = this.dialog.open(CreateTaskForm, {
+          width: '560px',
+          maxWidth: 'calc(100vw - 32px)',
+          maxHeight: 'calc(100dvh - 32px)',
+        });
+        dialogRef.componentRef?.setInput('assignees', [
+          ...taskStore.assignees(),
+        ]);
 
-      dialogRef.componentInstance.taskCreated.subscribe((task) => {
-        taskStore.addTask(task);
-        dialogRef.close();
-      });
-      dialogRef.componentInstance.cancelled.subscribe(() => dialogRef.close());
-    });
+        dialogRef.componentInstance.taskCreated.subscribe((task) => {
+          taskStore.addTask(task);
+          dialogRef.close();
+        });
+        dialogRef.componentInstance.cancelled.subscribe(() =>
+          dialogRef.close(),
+        );
+      },
+    );
   }
 }

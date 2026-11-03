@@ -16,7 +16,7 @@ import type {
   Assignee,
   AssigneeId,
   Task,
-  TaskCreate,
+  TaskCreateInput,
   TaskId,
   TaskPriority,
   TaskStatus,
@@ -103,7 +103,7 @@ export const TaskStore = signalStore(
   withMethods((store) => {
     const http = inject(HttpClient);
 
-    const findAssignee = (id: AssigneeId): Assignee => {
+    const findAssignee = (id: string): Assignee => {
       const assignee = store
         .assignees()
         .find((candidate) => candidate.id === id);
@@ -141,7 +141,7 @@ export const TaskStore = signalStore(
       getTask: (id: TaskId): Task | undefined =>
         store.tasks().find((task) => task.id === id),
 
-      addTask: (taskToCreate: TaskCreate): Task => {
+      addTask: (taskToCreate: TaskCreateInput): Task => {
         const now = new Date().toISOString();
         const { assigneeId, ...taskFields } = taskToCreate;
         const task: Task = {
@@ -214,7 +214,9 @@ export const TaskStore = signalStore(
         const columnTasks = currentTasks.filter((t) => t.status === status);
 
         const movedIdx = columnTasks.findIndex((t) => t.id === movedTaskId);
-        if (movedIdx === -1) {return;}
+        if (movedIdx === -1) {
+          return;
+        }
 
         // Splice the task out then insert at target position
         const [movedTask] = columnTasks.splice(movedIdx, 1);
