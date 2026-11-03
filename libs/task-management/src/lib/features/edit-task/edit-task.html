@@ -1,0 +1,118 @@
+<section class="edit-task">
+  <header class="dialog-header">
+    <div>
+      <h2 id="edit-task-title">Edit task</h2>
+      <p>Update the details of this task.</p>
+    </div>
+    <button
+      aria-label="Cancel"
+      class="close-button"
+      type="button"
+      (click)="cancelled.emit()"
+    >
+      &times;
+    </button>
+  </header>
+
+  <form aria-labelledby="edit-task-title" (submit)="updateTask($event)">
+    <label for="edit-task-title-input">Task title</label>
+    <input
+      autocomplete="off"
+      id="edit-task-title-input"
+      placeholder="e.g. Prepare project brief"
+      type="text"
+      [formField]="taskForm.title"
+    />
+    <div aria-live="polite" class="field-error-slot">
+      @if (taskForm.title().touched() && taskForm.title().invalid()) {
+        <span class="field-error">{{ taskForm.title().errors()[0].message }}</span>
+      }
+    </div>
+
+    <label for="edit-task-description">Description <span>(optional)</span></label>
+    <textarea
+      id="edit-task-description"
+      placeholder="Add more details about this task"
+      rows="3"
+      [formField]="taskForm.description"
+    ></textarea>
+
+    <div class="field-row">
+      <div>
+        <label for="edit-task-status">Status</label>
+        <select id="edit-task-status" [formField]="taskForm.status">
+          @for (status of statuses; track status.value) {
+            <option [value]="status.value">{{ status.label }}</option>
+          }
+        </select>
+      </div>
+
+      <div>
+        <label for="edit-task-priority">Priority</label>
+        <select id="edit-task-priority" [formField]="taskForm.priority">
+          @for (priority of priorities; track priority.value) {
+            <option [value]="priority.value">{{ priority.label }}</option>
+          }
+        </select>
+      </div>
+      <div>
+        <label for="edit-task-assignee">Assignee <span>(optional)</span></label>
+        <select
+          id="edit-task-assignee"
+          [value]="taskModel().assigneeId ?? ''"
+          (change)="updateAssignee($event)"
+        >
+          <option value="">Unassigned</option>
+          @for (assignee of assignees(); track assignee.id) {
+            <option [value]="assignee.id">{{ assignee.name }}</option>
+          }
+        </select>
+      </div>
+    </div>
+
+    <label for="edit-task-tags">Tags <span>(optional)</span></label>
+    <div class="tag-entry">
+      <input
+        autocomplete="off"
+        id="edit-task-tags"
+        placeholder="Type a tag and press Enter"
+        type="text"
+        [value]="tagInput()"
+        (input)="updateTagInput($event)"
+        (keydown)="handleTagKeydown($event)"
+      />
+      <button class="button-secondary" type="button" (click)="addTag()">Add tag</button>
+    </div>
+    <div aria-label="Added tags" class="tag-list">
+      @for (tag of taskModel().tags; track tag) {
+        <span class="tag-chip">
+          {{ tag }}
+          <button type="button" [attr.aria-label]="'Remove ' + tag" (click)="removeTag(tag)">
+            &times;
+          </button>
+        </span>
+      }
+    </div>
+
+    <label for="edit-task-due-date">Due date</label>
+    <input id="edit-task-due-date" type="date" [formField]="taskForm.dueDate" />
+    <div aria-live="polite" class="field-error-slot">
+      @if (taskForm.dueDate().touched() && taskForm.dueDate().invalid()) {
+        <span class="field-error">Choose a due date.</span>
+      }
+    </div>
+
+    <footer class="form-actions">
+      <button class="button-secondary" type="button" (click)="cancelled.emit()">
+        Cancel
+      </button>
+      <button
+        class="button-primary"
+        type="submit"
+        [disabled]="!taskForm().valid()"
+      >
+        Save changes
+      </button>
+    </footer>
+  </form>
+</section>
