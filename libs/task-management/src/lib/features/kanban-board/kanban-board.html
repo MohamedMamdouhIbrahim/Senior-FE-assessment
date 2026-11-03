@@ -1,4 +1,57 @@
+<div class="board-toolbar">
+  <div aria-label="Filter board columns" class="filter-group" role="group">
+    @for (filter of filters; track filter.id) {
+    <button
+      type="button"
+      [attr.aria-pressed]="selectedFilter() === filter.id"
+      [class.filter-button--active]="selectedFilter() === filter.id"
+      class="filter-button"
+      (click)="selectFilter(filter.id)"
+    >
+      {{ filter.label }}
+    </button>
+    }
+  </div>
+
+  <div class="toolbar-actions">
+    <button
+      aria-label="Sort every column by priority"
+      class="toolbar-button"
+      type="button"
+      (click)="togglePrioritySort()"
+    >
+      {{ prioritySort() === 'desc' ? 'Priority: High to low' : prioritySort()
+      === 'asc' ? 'Priority: Low to high' : 'Sort by priority' }}
+    </button>
+    <button
+      class="toolbar-button toolbar-button--primary"
+      type="button"
+      (click)="openCreateTask()"
+    >
+      Create task
+    </button>
+  </div>
+</div>
+
 <task-management-ui-kanban-board
+  class="board-content"
   [columns]="columns()"
   (taskDropped)="onTaskDropped($event)"
 />
+
+@if (isCreateTaskOpen()) {
+<div class="dialog-backdrop">
+  <section
+    aria-labelledby="create-task-title"
+    aria-modal="true"
+    class="dialog-panel"
+    role="dialog"
+  >
+    <task-management-create-task
+      [assignees]="assignees()"
+      (cancelled)="closeCreateTask()"
+      (taskCreated)="onTaskCreated($event)"
+    />
+  </section>
+</div>
+}
