@@ -2,10 +2,10 @@
   <div aria-label="Filter board columns" class="filter-group" role="group">
     @for (filter of filters; track filter.id) {
     <button
+      class="filter-button"
       type="button"
       [attr.aria-pressed]="selectedFilter() === filter.id"
       [class.filter-button--active]="selectedFilter() === filter.id"
-      class="filter-button"
       (click)="selectFilter(filter.id)"
     >
       {{ filter.label }}

@@ -1,9 +1,11 @@
+import { isPlatformBrowser } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   computed,
   inject,
   OnInit,
+  PLATFORM_ID,
   signal,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -42,6 +44,7 @@ const PRIORITY_RANK: Record<TaskPriority, number> = {
 export class KanbanBoard implements OnInit {
   private readonly taskStore = inject(TaskStore);
   private readonly destroyRef$ = takeUntilDestroyed();
+  private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
 
   protected readonly filters: { id: TaskStatus | 'all'; label: string }[] = [
     { id: 'all', label: 'All' },
@@ -79,8 +82,7 @@ export class KanbanBoard implements OnInit {
   });
 
   ngOnInit(): void {
-    // Load tasks only if not already loaded
-    if (this.taskStore.tasks().length === 0) {
+    if (this.isBrowser && this.taskStore.tasks().length === 0) {
       this.taskStore.loadTasks().pipe(this.destroyRef$).subscribe();
     }
   }
