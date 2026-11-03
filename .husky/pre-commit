@@ -1,2 +1,4 @@
+echo "HUSKY: pre-commit hook started" 
 npx lint-staged
 npm run lint
+echo "HUSKY: pre-commit hook ended" 
