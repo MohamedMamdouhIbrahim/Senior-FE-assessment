@@ -214,7 +214,7 @@ export const TaskStore = signalStore(
         const columnTasks = currentTasks.filter((t) => t.status === status);
 
         const movedIdx = columnTasks.findIndex((t) => t.id === movedTaskId);
-        if (movedIdx === -1) return;
+        if (movedIdx === -1) {return;}
 
         // Splice the task out then insert at target position
         const [movedTask] = columnTasks.splice(movedIdx, 1);

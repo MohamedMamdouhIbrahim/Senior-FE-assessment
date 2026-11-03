@@ -1,4 +1,4 @@
-import type { AssigneeId, TaskPriority, TaskStatus } from './task.model';
+import type { TaskPriority, TaskStatus } from './task.model';
 
 export const STATUSES: { value: TaskStatus; label: string }[] = [
   { value: 'todo', label: 'To do' },
