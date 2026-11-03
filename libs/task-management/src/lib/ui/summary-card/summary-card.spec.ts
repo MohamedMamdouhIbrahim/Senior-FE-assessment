@@ -34,6 +34,54 @@ describe('SummaryCard', () => {
     expect(component).toBeTruthy();
   });
 
+  it('shows the assignee avatar and name in the footer', () => {
+    fixture.componentRef.setInput('task', {
+      ...component.task(),
+      assignee: {
+        id: 'assignee-001' as NonNullable<Task['assignee']>['id'],
+        name: 'Alex Morgan',
+        avatar: '',
+        email: 'alex@example.com',
+      },
+    });
+    fixture.detectChanges();
+
+    expect(
+      fixture.nativeElement
+        .querySelector('.assignee-avatar')
+        .textContent.trim(),
+    ).toBe('A');
+    expect(
+      fixture.nativeElement.querySelector('.assignee-name').textContent.trim(),
+    ).toBe('@Alex Morgan');
+  });
+
+  it('does not show an assignee when the task is unassigned', () => {
+    expect(fixture.nativeElement.querySelector('.assignee')).toBeNull();
+  });
+
+  it('reserves the description and overdue badge sections when they are empty', () => {
+    fixture.componentRef.setInput('task', {
+      ...component.task(),
+      isOverdue: false,
+    });
+    fixture.detectChanges();
+
+    const description = fixture.nativeElement.querySelector(
+      '.card-description',
+    ) as HTMLElement;
+    const overdueBadge = fixture.nativeElement.querySelector(
+      '.overdue-badge',
+    ) as HTMLElement;
+
+    expect(description).toBeTruthy();
+    expect(description.textContent.trim()).toBe('');
+    expect(overdueBadge).toBeTruthy();
+    expect(overdueBadge.textContent.trim()).toBe('');
+    expect(overdueBadge.classList).toContain('overdue-badge--hidden');
+    expect(overdueBadge.getAttribute('aria-hidden')).toBe('true');
+  });
+
   it('highlights only overdue high-priority tasks', () => {
     const card = (): HTMLElement =>
       fixture.nativeElement.querySelector('.summary-card');

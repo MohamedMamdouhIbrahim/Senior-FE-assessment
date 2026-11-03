@@ -4,14 +4,22 @@ import {
   input,
   output,
 } from '@angular/core';
-import { CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
+import {
+  CdkDrag,
+  CdkDragHandle,
+  CdkDragPlaceholder,
+  CdkDragPreview,
+} from '@angular/cdk/drag-drop';
 import type { Task } from '../../data-access/models/task.model';
 import { Avatar } from '@fe-test-workspace/shared/ui/avatar/avatar';
 import { Tag } from '@fe-test-workspace/shared/ui/tag/tag';
 
 const DAY_IN_MILLISECONDS = 24 * 60 * 60 * 1000;
 
-function calendarDaysBetween(earlierDate: string, laterDate: string): number | undefined {
+function calendarDaysBetween(
+  earlierDate: string,
+  laterDate: string,
+): number | undefined {
   const earlier = Date.parse(`${earlierDate.slice(0, 10)}T00:00:00Z`);
   const later = Date.parse(`${laterDate.slice(0, 10)}T00:00:00Z`);
   if (!Number.isFinite(earlier) || !Number.isFinite(later)) {
@@ -40,7 +48,14 @@ function formatDuration(days: number): string {
 
 @Component({
   selector: 'task-management-summary-card',
-  imports: [CdkDrag, CdkDragHandle, Avatar, Tag],
+  imports: [
+    CdkDrag,
+    CdkDragHandle,
+    CdkDragPlaceholder,
+    CdkDragPreview,
+    Avatar,
+    Tag,
+  ],
   templateUrl: './summary-card.html',
   styleUrl: './summary-card.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -65,10 +80,7 @@ export class SummaryCard {
       return 'Completed';
     }
 
-    const days = calendarDaysBetween(
-      completedAt,
-      new Date().toISOString(),
-    );
+    const days = calendarDaysBetween(completedAt, new Date().toISOString());
     if (days === undefined) {
       return 'Completed';
     }
