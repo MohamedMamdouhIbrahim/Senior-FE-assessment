@@ -47,7 +47,7 @@
         },
         "outputMode": "server",
         "security": {
-          "allowedHosts": []
+          "allowedHosts": ["localhost", "127.0.0.1"]
         },
         "stylePreprocessorOptions": {
           "includePaths": ["libs/shared/src/lib/shared/styles"]
