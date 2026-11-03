@@ -6,7 +6,7 @@ import {
   signal,
 } from '@angular/core';
 import { form, FormField, minLength, required } from '@angular/forms/signals';
-import type { Assignee, TaskCreate } from '../../data-access/task.model';
+import type { Assignee, TaskCreate } from '../../data-access/models/task.model';
 import { PRIORITIES, STATUSES } from '../../data-access/task-constants';
 
 @Component({

@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import type { Task, TaskUpdate } from '../../data-access/task.model';
+import type { Task, TaskUpdate } from '../../data-access/models/task.model';
 import { EditTask } from './edit-task';
 
 describe('EditTask', () => {

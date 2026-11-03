@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import type { TaskCreate } from '../../data-access/task.model';
+import type { TaskCreate } from '../../data-access/models/task.model';
 import { CreateTask } from './create-task';
 
 describe('CreateTask', () => {

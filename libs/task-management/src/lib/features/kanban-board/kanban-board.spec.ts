@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { computed, signal } from '@angular/core';
 import { type Observable, of } from 'rxjs';
-import type { Task, TaskStatus } from '../../data-access/task.model';
+import type { Task, TaskStatus } from '../../data-access/models/task.model';
 import { TaskStore } from '../../data-access/task.store';
 import { KanbanBoard } from './kanban-board';
 

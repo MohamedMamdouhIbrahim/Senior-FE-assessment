@@ -12,7 +12,7 @@ import type {
   TaskPriority,
   TaskStatus,
   TaskUpdate,
-} from '../../data-access/task.model';
+} from '../../data-access/models/task.model';
 import {
   KanbanBoardColumn,
   KanbanBoardUi,

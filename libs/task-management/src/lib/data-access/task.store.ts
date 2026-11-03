@@ -21,7 +21,7 @@ import type {
   TaskPriority,
   TaskStatus,
   TaskUpdate,
-} from './task.model';
+} from './models/task.model';
 
 type MockTask = Omit<
   Task,

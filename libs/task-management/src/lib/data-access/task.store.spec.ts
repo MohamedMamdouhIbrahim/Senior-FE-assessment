@@ -4,7 +4,7 @@ import {
   provideHttpClientTesting,
 } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import type { AssigneeId, TaskCreate, TaskId } from './task.model';
+import type { AssigneeId, TaskCreate, TaskId } from './models/task.model';
 import { TaskStore } from './task.store';
 
 describe('TaskStore', () => {

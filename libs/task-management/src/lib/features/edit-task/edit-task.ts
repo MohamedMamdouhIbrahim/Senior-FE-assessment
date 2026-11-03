@@ -12,7 +12,7 @@ import type {
   Task,
   TaskCreate,
   TaskUpdate,
-} from '../../data-access/task.model';
+} from '../../data-access/models/task.model';
 import { PRIORITIES, STATUSES } from '../../data-access/task-constants';
 
 @Component({

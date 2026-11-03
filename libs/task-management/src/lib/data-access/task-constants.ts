@@ -1,4 +1,4 @@
-import type { TaskPriority, TaskStatus } from './task.model';
+import type { TaskPriority, TaskStatus } from './models/task.model';
 
 export const STATUSES: { value: TaskStatus; label: string }[] = [
   { value: 'todo', label: 'To do' },
@@ -11,5 +11,4 @@ export const PRIORITIES: { value: TaskPriority; label: string }[] = [
   { value: 'medium', label: 'Medium' },
   { value: 'high', label: 'High' },
 ];
-
 
