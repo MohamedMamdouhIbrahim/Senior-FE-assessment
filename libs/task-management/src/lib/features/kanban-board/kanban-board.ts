@@ -11,16 +11,21 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TaskStore } from '../../data-access/task.store';
 import type {
+  Task,
   TaskCreate,
   TaskPriority,
   TaskStatus,
+  TaskUpdate,
 } from '../../data-access/task.model';
 import {
   KanbanBoardColumn,
   KanbanBoardUi,
 } from '../../ui/kanban-board/kanban-board';
+import { BoardToolbar } from '../../ui/board-toolbar/board-toolbar';
+import { TaskSummary } from '../../ui/task-summary/task-summary';
 import type { ColumnDropEvent } from '../../ui/kanban-column/kanban-column';
 import { CreateTask } from '../create-task/create-task';
+import { EditTask } from '../edit-task/edit-task';
 
 const COLUMN_CONFIG: { id: TaskStatus; title: string }[] = [
   { id: 'todo', title: 'To Do' },
@@ -36,7 +41,7 @@ const PRIORITY_RANK: Record<TaskPriority, number> = {
 
 @Component({
   selector: 'task-management-kanban-board',
-  imports: [CreateTask, KanbanBoardUi],
+  imports: [CreateTask, EditTask, KanbanBoardUi, BoardToolbar, TaskSummary],
   templateUrl: './kanban-board.html',
   styleUrl: './kanban-board.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -46,15 +51,11 @@ export class KanbanBoard implements OnInit {
   private readonly destroyRef$ = takeUntilDestroyed();
   private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
 
-  protected readonly filters: { id: TaskStatus | 'all'; label: string }[] = [
-    { id: 'all', label: 'All' },
-    { id: 'todo', label: 'To do' },
-    { id: 'in_progress', label: 'In progress' },
-    { id: 'done', label: 'Done' },
-  ];
   protected readonly selectedFilter = signal<TaskStatus | 'all'>('all');
   protected readonly prioritySort = signal<'asc' | 'desc' | null>(null);
   protected readonly isCreateTaskOpen = signal(false);
+  protected readonly editingTask = signal<Task | null>(null);
+  protected readonly tasks = computed(() => this.taskStore.tasks());
   protected readonly assignees = computed(() => [
     ...this.taskStore.assignees(),
   ]);
@@ -101,13 +102,31 @@ export class KanbanBoard implements OnInit {
     this.isCreateTaskOpen.set(true);
   }
 
+  protected openEditTask(task: Task): void {
+    this.editingTask.set(task);
+  }
+
   protected closeCreateTask(): void {
     this.isCreateTaskOpen.set(false);
+  }
+
+  protected closeEditTask(): void {
+    this.editingTask.set(null);
   }
 
   protected onTaskCreated(task: TaskCreate): void {
     this.taskStore.addTask(task);
     this.closeCreateTask();
+  }
+
+  protected onTaskUpdated(changes: TaskUpdate): void {
+    const task = this.editingTask();
+    if (!task) {
+      return;
+    }
+
+    this.taskStore.updateTask(task.id, changes);
+    this.closeEditTask();
   }
 
   protected onTaskDropped(event: ColumnDropEvent): void {

@@ -11,6 +11,7 @@
     [id]="columnStatus()"
     [cdkDropListData]="tasks()"
     [cdkDropListConnectedTo]="connectedTo()"
+    [cdkDropListAutoScrollStep]="8"
     (cdkDropListDropped)="onDrop($event)"
     class="task-list"
     [class.task-list--empty]="tasks().length === 0"

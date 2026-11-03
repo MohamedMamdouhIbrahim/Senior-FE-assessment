@@ -1,12 +1,13 @@
-<div class="board">
+<div cdkScrollable class="board">
   @for (column of columns(); track column.id) {
-    <task-management-kanban-column
-      [columnStatus]="column.id"
-      [columnTitle]="column.title"
-      [connectedTo]="getConnectedTo(column.id)"
-      [tasks]="column.tasks"
-      (taskClicked)="taskClicked.emit($event)"
-      (taskDropped)="taskDropped.emit($event)"
-    />
+  <task-management-kanban-column
+    class="board-column"
+    [columnStatus]="column.id"
+    [columnTitle]="column.title"
+    [connectedTo]="getConnectedTo(column.id)"
+    [tasks]="column.tasks"
+    (taskClicked)="taskClicked.emit($event)"
+    (taskDropped)="taskDropped.emit($event)"
+  />
   }
 </div>
