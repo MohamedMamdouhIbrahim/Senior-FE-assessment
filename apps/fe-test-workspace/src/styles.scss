@@ -54,4 +54,10 @@ body {
       container-background-color: var(--color-bg-surface),
     )
   );
+
+  @include mat.list-overrides(
+    (
+      list-item-container-shape: 0.2rem,
+    )
+  );
 }
