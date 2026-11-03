@@ -48,4 +48,10 @@ body {
       filled-hover-state-layer-opacity: 1,
     )
   );
+
+  @include mat.sidenav-overrides(
+    (
+      container-background-color: var(--color-bg-surface),
+    )
+  );
 }
