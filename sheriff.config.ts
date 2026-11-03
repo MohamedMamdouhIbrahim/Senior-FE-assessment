@@ -4,6 +4,11 @@ export const config: SheriffConfig = {
   enableBarrelLess: true,
 
   modules: {
+    'libs/<domain>/src': ['root'],
+    'libs/<domain>/src/lib/data-access': [
+      'domain:<domain>',
+      'type:data-access',
+    ],
     'libs/<domain>/src/lib/data-access/models': [
       'domain:<domain>',
       'type:data-access-model',
@@ -13,10 +18,11 @@ export const config: SheriffConfig = {
 
   depRules: {
     // A domain can only depend on its own domain.
-    'domain:*': ({ from, to }) => from === to,
+    'domain:*': ({ from, to }) => from === to || to === 'domain:shared',
 
     // Features can depend on data-access, UI, and utils.
-    'type:feature': [
+    'type:features': [
+      'type:data-access',
       'type:data-access',
       'type:data-access-model',
       'type:ui',
@@ -27,7 +33,7 @@ export const config: SheriffConfig = {
     'type:data-access': ['type:data-access-model', 'type:utils'],
 
     // UI can depend on utils and data-access models, but not stores.
-    'type:ui': ['type:data-access-model', 'type:utils'],
+    'type:ui': ['type:data-access-model', 'type:shared', 'type:utils'],
 
     // Utils can use data-access models but not other architectural layers.
     'type:utils': 'type:data-access-model',
