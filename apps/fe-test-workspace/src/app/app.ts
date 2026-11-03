@@ -79,6 +79,7 @@ export class App {
       const dialogRef = this.dialog.open(CreateTask, {
         width: '560px',
         maxWidth: 'calc(100vw - 32px)',
+        maxHeight: 'calc(100dvh - 32px)',
       });
 
       dialogRef.componentInstance.taskCreated.subscribe((task) => {

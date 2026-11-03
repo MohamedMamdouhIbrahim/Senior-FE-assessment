@@ -26,6 +26,11 @@
           },
           {
             "glob": "**/*",
+            "input": "apps/fe-test-workspace/src/assets",
+            "output": "/assets"
+          },
+          {
+            "glob": "**/*",
             "input": "libs/shared/src/lib/shared/icons",
             "output": "/assets/icons"
           }
