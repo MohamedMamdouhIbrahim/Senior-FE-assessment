@@ -1,0 +1,6 @@
+[build]
+  command = "npx nx build fe-test-workspace --configuration=production"
+  publish = "dist/apps/fe-test-workspace/browser"
+
+[[plugins]]
+  package = "@netlify/angular-runtime"
