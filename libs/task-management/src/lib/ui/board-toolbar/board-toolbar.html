@@ -1,0 +1,34 @@
+<div class="board-toolbar">
+  <div aria-label="Filter board columns" class="filter-group" role="group">
+    @for (filter of filters; track filter.id) {
+    <button
+      class="filter-button"
+      type="button"
+      [attr.aria-pressed]="selectedFilter() === filter.id"
+      [class.filter-button--active]="selectedFilter() === filter.id"
+      (click)="filterSelected.emit(filter.id)"
+    >
+      {{ filter.label }}
+    </button>
+    }
+  </div>
+
+  <div class="toolbar-actions">
+    <button
+      aria-label="Sort every column by priority"
+      class="toolbar-button"
+      type="button"
+      (click)="prioritySortToggled.emit()"
+    >
+      {{ prioritySort() === 'desc' ? 'Priority: High to low' : prioritySort()
+      === 'asc' ? 'Priority: Low to high' : 'Sort by priority' }}
+    </button>
+    <button
+      class="toolbar-button toolbar-button--primary"
+      type="button"
+      (click)="createTaskClicked.emit()"
+    >
+      Create task
+    </button>
+  </div>
+</div>
